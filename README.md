@@ -1,58 +1,92 @@
-# Documentacion FastAPI
-## como primer paso se creara el entorno viartual 
-    venv es un módulo de Python que crea un entorno virtual. El segundo venv es el nombre que le damos a la carpeta del entorno virtual.
+# FastAPI Documentation
 
-    - codigo: `python -m venv venv`
-
-    seguido a esto se inicializara el entorno con
-
-    - codigo: `.\venv\Scripts\activate`
-
-    Activar el entorno virtual te asegura que cualquier paquete que instales (como FastAPI) se guardará dentro de la carpeta venv y no globalmente en tu sistema.
-
-## como segundo paso se comenzara con la instalacion de fastapi y uvicorn
-
-    - codigo: `pip install "fastapi[all]"`
-
-    ***Justificación:*** Esta es la forma más fácil de instalar FastAPI junto con todas sus dependencias opcionales más comunes, como uvicorn (para correr el servidor), pydantic (para validación de datos) y otros.
-
-    - codigo: `pip install "uvicorn[standard]"`
-
-    ***Justificación:*** uvicorn es un servidor web asíncrono que corre aplicaciones ASGI (Asynchronous Server Gateway Interface), como FastAPI. En términos sencillos, es lo que permite que tu aplicación web se ejecute y reciba peticiones.
-
-# lo siguiente es comprobar que todo este bien y para eso crearemos nuestro primer hola mundo en fastAPI.
-para esto crearemos un archivo main.py Este será el archivo principal donde escribiremos el código de nuestra API.
+Este documento describe cómo crear un entorno virtual, instalar **FastAPI** y **Uvicorn**, y ejecutar un primer proyecto de ejemplo.
 
 ---
 
-## Explicacion del codigo:
-    from fastapi import FastAPI: Importamos la clase principal de la biblioteca. Es la base de nuestra aplicación.
+## 1. Crear el entorno virtual
 
-    **app = FastAPI():** Creamos una instancia de la clase FastAPI. A esta instancia la llamamos app.
+**`venv`** es un módulo de Python que crea un entorno virtual.  
+El segundo **`venv`** es el nombre que le damos a la carpeta del entorno.
 
-    **@app.get("/"):** Esto es un decorador. Un decorador es una forma de "envolver" una función para modificar su comportamiento. En este caso, le dice a FastAPI que la función que está debajo (read_root) se debe ejecutar cuando alguien hace una petición GET a la ruta **"/"** (la raíz de tu sitio web).
+```
+python -m venv venv
+```
 
-    **def read_root():**: Esta es la función que se ejecuta.
+## 2. Luego se inicializa el entorno con:
 
-    **return {"Hola": "Mundo"}:** La función devuelve un diccionario de Python. FastAPI automáticamente lo convierte a un formato JSON (JavaScript Object Notation), que es el formato estándar para intercambiar datos en la web. La respuesta será: {"Hola": "Mundo"}.
+```
+.\venv\Scripts\activate
+```
+Activar el entorno virtual asegura que cualquier paquete que instales (como FastAPI) se guarde dentro de la carpeta venv y no globalmente en tu sistema.
 
-## Ejecutando tu Servidor
+## 3. Instalar FastAPI y Uvicorn:
+- Instalamos `FastAPI` con todas sus dependencias más comunes:
+     ```
+     pip install "fastapi[all]"
+     ```
+     
+    **Justificación:**
+    Esta es la forma más fácil de instalar FastAPI junto con dependencias opcionales como:
+    
+    `uvicorn` → servidor para correr la aplicación.
+    
+    `pydantic` → validación de datos.
+    
+     Otros módulos útiles.
+- También instalamos `Uvicorn` explícitamente:
+    ```
+    pip install "uvicorn[standard]"
+    ```
+    **Justificación:**
+    Uvicorn es un servidor web asíncrono que ejecuta aplicaciones ASGI (Asynchronous Server Gateway Interface).
+    En términos sencillos, es lo que permite que tu aplicación web se ejecute y reciba peticiones.
+  
+## 4. Crear el primer proyecto: **Hola Mundo**
 
-    - codigo: `uvicorn main:app --reload` 
+Creamos un archivo `main.py`.
+Este será el archivo principal donde escribiremos el código de nuestra API.
+```
+from fastapi import FastAPI
 
-    Explicación del Comando:
-    uvicorn: El servidor web que estamos usando.
+app = FastAPI()
 
-    main:app: Le estamos diciendo a uvicorn que busque la instancia llamada app dentro del archivo main.py.
+@app.get("/")
+def read_root():
+    return {"Hola": "Mundo"}
+```
+**Explicación del código**
 
-    --reload: Esto es muy útil durante el fase de desarrollo. Le dice a uvicorn que reinicie el servidor automáticamente cada vez que guardes un cambio en tu código.
+`from fastapi import FastAPI` → Importamos la clase principal de la biblioteca, base de nuestra aplicación.
 
-## Documentación Automática de FastAPI
-- Una de las mejores cosas de FastAPI es su documentación automática.
+`app = FastAPI()` → Creamos una instancia de la clase FastAPI y la llamamos app.
 
-    Paso a paso:
-    Abre tu navegador web y ve a la siguiente dirección: http://127.0.0.1:8000/docs.
+`@app.get("/")` → Decorador que indica que la función se ejecuta cuando alguien hace una petición GET a la ruta "/" (la raíz del sitio).
 
-    Verás una interfaz interactiva de Swagger UI . Aquí puedes ver y probar todas las rutas (endpoints) que has creado. FastAPI genera esto por ti automáticamente a partir de tu código.
+`def read_root():` → Función que maneja la ruta.
 
-    También puedes ir a http://127.0.0.1:8000/redoc para ver una documentación alternativa.
+`return {"Hola": "Mundo"}` → Retorna un diccionario en Python. FastAPI lo convierte automáticamente a JSON.
+
+## 5. Ejecutar el servidor
+Para iniciar la aplicación, usa el siguiente comando:
+
+```
+uvicorn main:app --reload
+```
+**Explicación del comando:**
+
+`uvicorn` → servidor web que utilizamos.
+
+`main:app` → le dice a Uvicorn que busque la instancia `app` en el archivo `main.py`.
+
+`--reload` → reinicia el servidor automáticamente cuando detecta cambios (muy útil en desarrollo).
+
+## **Documentación automática de FastAPI**
+Una de las mejores características de FastAPI es su documentación automática.
+
+Abre tu navegador web.
+
+**Visita:** `http://127.0.0.1:8000/docs` → Interfaz **Swagger UI** donde puedes probar tus endpoints.
+
+**Alternativamente, visita:** `http://127.0.0.1:8000/redoc` → Documentación en formato ReDoc.
+
