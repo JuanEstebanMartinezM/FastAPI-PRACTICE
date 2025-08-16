@@ -12,6 +12,12 @@ El segundo **`venv`** es el nombre que le damos a la carpeta del entorno.
 ```
 python -m venv venv
 ```
+    1.1. ¿Cómo desactivar el entorno virtual?
+    El entorno virtual se desactiva con el siguiente comando:
+
+    ```
+    deactivate
+    ```
 
 ## 2. Luego se inicializa el entorno con:
 
@@ -41,6 +47,9 @@ Activar el entorno virtual asegura que cualquier paquete que instales (como Fast
     **Justificación:**
     Uvicorn es un servidor web asíncrono que ejecuta aplicaciones ASGI (Asynchronous Server Gateway Interface).
     En términos sencillos, es lo que permite que tu aplicación web se ejecute y reciba peticiones.
+    **RECOMENDACIÓN**  
+    **Para aprender y proyectos pequeños:** instala solo fastapi y luego añade lo que necesites manualmente,
+    ya que al usar `[all] o [standard]` Básicamente te instala todo lo que podrías llegar a necesitar, pero muchas de esas librerías puede que no las uses nunca.
   
 ## 4. Crear el primer proyecto: **Hola Mundo**
 
